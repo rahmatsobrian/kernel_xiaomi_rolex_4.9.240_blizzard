@@ -94,6 +94,9 @@ int fscrypt_ioctl_set_policy(struct file *filp, const void __user *arg)
 		ret = 0;
 	} else if (ret >= 0 || ret == -ERANGE) {
 		/* The file already uses a different encryption policy. */
+		printk(KERN_WARNING
+		       "%s: Policy inconsistent with encryption context\n",
+		       __func__);
 		ret = -EEXIST;
 	}
 

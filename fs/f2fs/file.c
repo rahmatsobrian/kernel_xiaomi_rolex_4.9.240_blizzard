@@ -2207,8 +2207,10 @@ static int f2fs_ioc_get_encryption_policy(struct file *filp, unsigned long arg)
 {
 	if (!f2fs_sb_has_encrypt(F2FS_I_SB(file_inode(filp))))
 		return -EOPNOTSUPP;
+
 	return fscrypt_ioctl_get_policy(filp, (void __user *)arg);
 }
+
 
 static int f2fs_ioc_get_encryption_pwsalt(struct file *filp, unsigned long arg)
 {
