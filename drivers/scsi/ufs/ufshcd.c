@@ -9998,6 +9998,7 @@ int ufshcd_shutdown(struct ufs_hba *hba)
 	/* reqs issued from contexts other than shutdown will fail from now */
 	ufshcd_scsi_unblock_requests(hba);
 	ufshcd_release_all(hba);
+
 	ret = ufshcd_suspend(hba, UFS_SHUTDOWN_PM);
 out:
 	if (ret)
@@ -10006,6 +10007,7 @@ out:
 	return 0;
 }
 EXPORT_SYMBOL(ufshcd_shutdown);
+
 
 /*
  * Values permitted 0, 1, 2.
