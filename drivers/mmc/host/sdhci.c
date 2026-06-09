@@ -2027,8 +2027,8 @@ static void sdhci_set_ios(struct mmc_host *mmc, struct mmc_ios *ios)
 			mmc_card_sdio(host->mmc->card))
 		sdhci_cfg_irq(host, false, false);
 
-	if (!ios->clock || ios->clock != host->clock ||
-	    (ios->clock && ios->timing != host->timing)) {
+	if (ios->clock &&
+	    ((ios->clock != host->clock) || (ios->timing != host->timing))) {
 		turning_on_clk = ios->clock && !host->clock;
 
 		spin_unlock_irqrestore(&host->lock, flags);
