@@ -1196,7 +1196,8 @@ EXPORT_SYMBOL_GPL(verity_ctr);
 
 static struct target_type verity_target = {
 	.name		= "verity",
-	.version	= {1, 4, 0},
+	.features	= DM_TARGET_IMMUTABLE, /* Fitur keamanan baru dari Upstream */
+	.version	= {1, 4, 0},           /* Versi modern dari CAF/Android */
 	.module		= THIS_MODULE,
 	.ctr		= verity_ctr,
 	.dtr		= verity_dtr,
