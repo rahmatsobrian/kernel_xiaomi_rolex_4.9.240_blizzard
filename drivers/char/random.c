@@ -61,6 +61,26 @@
 #include <asm/irq_regs.h>
 #include <asm/io.h>
 
+/* --- MULAI JEMBATAN KOMPATIBILITAS CHACHA --- */
+#ifndef CHACHA20_KEY_SIZE
+#define CHACHA20_KEY_SIZE CHACHA_KEY_SIZE
+#endif
+
+#ifndef CHACHA20_BLOCK_SIZE
+#define CHACHA20_BLOCK_SIZE CHACHA_BLOCK_SIZE
+#endif
+
+#ifndef chacha_init_consts
+static inline void chacha_init_consts(u32 *state)
+{
+	state[0]  = 0x61707865; /* "expa" */
+	state[1]  = 0x3320646e; /* "nd 3" */
+	state[2]  = 0x79622d32; /* "2-by" */
+	state[3]  = 0x6b206574; /* "te k" */
+}
+#endif
+/* --- SELESAI JEMBATAN KOMPATIBILITAS --- */
+
 /*********************************************************************
  *
  * Initialization and readiness waiting.
